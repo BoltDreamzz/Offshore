@@ -1,0 +1,121 @@
+{%extends 'partials/base2.html'%}
+{%block title%}Resolve issue{%endblock%}
+{%load static%}
+
+{%block content%}
+<style>
+    .greet-text {
+        font-weight: 600;
+
+    }
+
+    .text-dark {
+        font-weight: bold;
+    }
+
+    section {
+        flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 0;
+    }
+
+    section .greet {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: flex-start;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .bite {
+        font-size: 13px;
+        padding: 3px 6px;
+        border-radius: 50px;
+        color: #000;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+
+
+    .btn-outline-dark {
+        background: #ffffff;
+        padding: 5px 12px;
+        color: #000000;
+        border-radius: 50px;
+        margin: 0 5px;
+        font-size: 0.8em;
+    }
+
+    .round-it {
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .money {
+        font-size: 1.6em;
+        font-weight: bolder;
+    }
+</style>
+<section>
+    <div class="container m-w-100 m-h-100">
+        <div class="my-2">
+            <div role="alert" class="alert alert-info text-white" data-aos="zoom-in">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="h-6 w-6 shrink-0 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>This account has been frozen.</span>
+            </div>
+        </div>
+
+
+        <br>
+        <h1 class="h4 font-bold mb-2">Problems</h1>
+        <p>We identified some potential issues with your account which requires <span
+                class="text-primary font-bold">recommended actions</span>.</p>
+        <br>
+        <p>We noticed an outstanding tax payment in relation to some inherited properties i our name, ask your family attorney for
+            the <span class="text-primary font-bold">inheritance tax documents</span> if needed'.</p>
+        <br>
+        <p>To resolve this issue, you have to complete your outstanding tax payment of <span
+                class="text-primary font-bold">$ 9,143</span>.</p>
+        <br>
+        <br>
+        <h1 class="h4 font-bold mb-2">Payment info</h1>
+        <div class="mockup-browser bg-base-300 border shadow-lg"  data-aos="zoom-out-down" data-aos-duration="2000">
+            <div class="mockup-browser-toolbar">
+                <div class="input">https://help.offshore.com</div>
+            </div>
+            <span class="flex flex-col justify-center align-items-center my-3">
+
+                <div class="radial-progress text-primary mb-2" style="--value:60;" role="progressbar">63%</div>
+                <p class="px-4 text-sm font-bold">You have paid <span class="text-primary">$4,571.5</span> / <span class="text-primary"> $ 9,143</span>.</p>                
+                <small class="px-4">Outstanding: <span class="text-primary">$4,572.5</span></small>
+
+                <div class="flex flex-col my-3">
+                    <i>Progress:</i>
+                    <progress class="progress progress-primary w-56 mb-2" value="60" max="100"></progress>
+
+                </div>
+                <a href="{%url 'finance:send_money'%}" class="btn btn-sm btn-primary">Continue resolving</a>
+
+<br>
+
+
+            </span>
+        </div>
+    </div>
+
+</section>
+
+<br><br><br><br>
+
+
+{%endblock%}

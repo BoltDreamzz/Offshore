@@ -1,0 +1,161 @@
+{%extends 'partials/base.html'%}
+{%block title%}Bank{%endblock%}
+{%load static%}
+
+{%block content%}
+<style>
+    .greet-text {
+        font-weight: 600;
+
+    }
+
+    .text-dark {
+        font-weight: bold;
+    }
+
+    section {
+        flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 0;
+    }
+
+    section .greet {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: flex-start;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .bite {
+        font-size: 13px;
+        padding: 3px 6px;
+        border-radius: 50px;
+        color: #000;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+
+
+    .btn-outline-dark {
+        background: #ffffff;
+        padding: 5px 12px;
+        color: #000000;
+        border-radius: 50px;
+        margin: 0 5px;
+        font-size: 0.8em;
+    }
+
+    .round-it {
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .money {
+        font-size: 1.6em;
+        font-weight: bolder;
+    }
+</style>
+<section>
+    <h4 class="greet-text h4">Hello Miriam!</h4>
+    <p class="text-muted">Please resolve the issue with your account. See <a href="#"
+            class="text-primary font-bold">here</a> for more info.</p>
+    <br>
+    <div class="w-100">
+        <div class="stats shadow-md flex flex-col bg-primary text-primary-content" data-aos="fade-up">
+            <div class="stat">
+                <div class="stat-title">Account balance</div>
+                <div class="stat-value">$0.59</div>
+                <div class="stat-actions">
+                    <button class="btn btn-sm">Add funds</button>
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">Current balance</div>
+                <div class="stat-value">$20,447,240.79</div>
+                <div class="stat-actions">
+                    <a href="{%url 'finance:resolve'%}" class="btn btn-sm">Withdrawal</a>
+                    <a href="{%url 'finance:resolve'%}" class="btn btn-sm">Deposit</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div class="greet border shadow-sm">
+
+
+
+        <div class="d-flex mb-2 justify-content-between align-items-center">
+            <h6 class="fw-bold">History</h6>
+
+
+            <a href="#" class="text-decoration-none">
+                <i class="bi bite bi-chevron-right"></i>
+            </a>
+        </div>
+
+        <div role="alert" class="alert alert-warning" data-aos="zoom-in">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>Warning: we detected an issue with your offshore account.</span>
+            <a href="{%url 'finance:resolve'%}" class="text-center btn btn-sm brn-error">Resolve</a>
+        </div>
+
+    </div>
+    <br>
+    <h5 class="greet-text my-3">Linked accounts</h5>
+    <div class="container">
+        <div class="d-flex gap-3 align-items-center">
+            <a href="#" class="border rounded-4"><img class="round-it" src="{%static 'shop_media/Wellss.png'%}"
+                    alt=""></a>
+            <div class="d-flex flex-column justify-content-start align-items-start pt-2">
+                <a href="#" class="text-dark ">Wells Fargo</a>
+                <p class="text-muted display-8">Checking 0478</p>
+            </div>
+        </div>
+        <br>
+        <hr>
+    </div>
+    <br>
+    <h5 class="greet-text">Offers for you <span class="bg-body-tertiary rounded-2 px-2 my-2 text-primary"
+            style="font-size: 12px;">New</span></h5>
+    <br>
+    <div class="container flex flex-col align-items-center text-center mb-3">
+        <img width="170" class="p-3 rounded-3 border" src="{%static 'shop_media/int.png'%}" alt="">
+        <div class="text-center">
+            <p class="text-muted my-2 text-center">
+                Invest in stocks and Crypto currency assets
+            </p>
+            <a href="#" class="btn-sm text-dark">Start investing</a>
+        </div>
+    </div> <br>
+    <div class="container">
+        <hr class="mx-5">
+    </div><br>
+    <div class="container flex flex-col align-items-center text-center mb-3">
+        <img width="170" class="p-3 rounded-3 border" src="{%static 'shop_media/Tax.png'%}" alt="">
+        <div class="text-center">
+            <p class="text-muted my-2 text-center">
+                Fill Tax refunds quickly
+            </p>
+            <a href="#" class="btn-sm text-dark">Start filling</a>
+        </div>
+    </div>
+    <!--    <div class="container">-->
+    <!--        <hr class="mx-5">-->
+    <!--    </div>-->
+</section><br><br><br><br>
+
+
+{%endblock%}
