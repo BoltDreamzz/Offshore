@@ -24,7 +24,17 @@ SECRET_KEY = 'django-insecure-g+!-fj5f*93rqesse-9c4-sv0kc5dh^s$^$7@e3j3=*pw_t0xh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "offshore.onrender.com",
+    "127.0.0.1",
+    ]
+
+# ALLOWED_HOSTS = ["127.0.0.1", "mammimart.onrender.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://offshore.onrender.com",
+]
+
+
 LOGIN_URL = "userauths:login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
