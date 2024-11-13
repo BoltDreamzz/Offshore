@@ -54,3 +54,18 @@ class LoginForm(AuthenticationForm):
         "class": "form-control bg-body-tertiary",
         "placeholder": "password"
     }))
+
+
+# forms.py
+# from django import forms
+from .models import CreditCard
+
+class CreditCardForm(forms.ModelForm):
+    class Meta:
+        model = CreditCard
+        fields = ['card_holder_name', 'card_number', 'expiration_date', 'cvv']
+        widgets = {
+            'card_number': forms.PasswordInput(),  # Hide card number for added security
+            'cvv': forms.PasswordInput(),          # Hide CVV for added security
+            'expiration_date': forms.DateInput(attrs={'type': 'date'}),
+        }

@@ -104,23 +104,21 @@
 
     <div class="space-y-4">
         <!-- Credit Card -->
-        <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-            <h2 class="font-semibold mb-2">Credit Card</h2>
-            <p class="text-sm text-gray-600">Pay securely with your credit card</p>
-        </div>
-
+         <a href="{%url 'userauths:credit_card'%}">
+            <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
+                <h2 class="font-semibold mb-2">Credit Card</h2>
+                <p class="text-sm text-gray-600">Pay securely with your credit card</p>
+            </div>
+    
+         </a>
+        
         <!-- PayPal -->
         <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
             <h2 class="font-semibold mb-2">PayPal</h2>
             <p class="text-sm text-gray-600">Pay with your PayPal account</p>
         </div>
 
-        <!-- Bank Transfer -->
-        <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-            <h2 class="font-semibold mb-2">Bank Transfer</h2>
-            <p class="text-sm text-gray-600">Pay directly from your bank account</p>
-        </div>
-
+    
         <!-- Bitcoin -->
         <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
             <h2 class="font-semibold mb-2">Bitcoin (BTC)</h2>
@@ -133,15 +131,11 @@
 
         <!-- Apple Pay -->
         <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-            <h2 class="font-semibold mb-2">Apple Pay</h2>
+            <h2 class="font-semibold mb-2">Apple Pay <span class="badge bg-warning">Unavailable</span></h2>
             <p class="text-sm text-gray-600">Pay with Apple Pay (iOS devices only)</p>
         </div>
 
-        <!-- Google Pay -->
-        <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-            <h2 class="font-semibold mb-2">Google Pay</h2>
-            <p class="text-sm text-gray-600">Pay with Google Pay</p>
-        </div>
+        
     </div>
 
     <div class="mt-8">
@@ -150,35 +144,7 @@
             Proceed to Payment
         </button>
     </div>
-    <div class="d-flex justify-content-start align-items-center gap-3">
-        <a href="#" class="border border-tertiary rounded-4 overflow-hidden"><img class="round-it"
-                src="{%static 'shop_media/web43.jpg'%}" alt=""></a>
-    </div>
-    <section>
-        <a href="#" class="max text-muted">Transfer amount</a>
-        <h3 class="greet-text my-2 fw-bold">$ 0.56</h3>
-    </section>
-    <div class="text-center">
-        <a href="" class="login bg-body-tertiary w-100 btn-lg text-dark fw-bold form-control">Add money</a>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between my-2 align-items-center">
-        <a href="#" class="max text-muted">Transfer fee</a>
-        <span class="badge bg-body-tertiary text-dark">Free</span>
-    </div>
-    <div class="d-flex justify-content-between my-2 align-items-center">
-        <a href="#" class="max text-muted">Amount</a>
-        <a href="#" class="text-dark fw-bold h3">$100</a>
-    </div>
-    <div class="d-flex justify-content-between my-2 align-items-center">
-        <a href="#" class="max text-muted">Account type</a>
-        <a href="#" class="text-dark fw-bold h6">Savings</a>
-    </div>
-    <!--<div class="text-center">-->
-    <!--    <a href="" class="login bg-dark w-100 btn-lg text-white fw-bold form-control">Connect bank account</a>-->
-    <!--</div>-->
-
-
+    
     <br><br><br><br>
 
 

@@ -1,0 +1,96 @@
+{%extends 'partials/base.html'%}
+{%block title%}Add card{%endblock%}
+{%load static%}
+
+{%block content%}
+
+
+<div class="bg-white p-8 rounded-lg shadow-md w-96">
+    <div class="container my-2">
+        <div role="alert" class="alert alert-success text-white" data-aos="zoom-in-down">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 text-white stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>This page has been secured !</span>
+        </div>
+    </div>
+    <h2 class="text-2xl font-bold mb-6 text-center">Add Credit Card</h2>
+    
+    <p class="text-center text-blue-400">Powered by stripe.</p>
+    <form id="creditCardForm" method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="1234 5678 9012 3456" maxlength="19">
+        </div>
+        <div class="flex space-x-4">
+            <div class="flex-1">
+                <label for="expDate" class="block text-sm font-medium text-gray-700">Expiration Date</label>
+                <input type="text" id="expDate" name="expDate" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="flex-1">
+                <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                <input type="text" id="cvv" name="cvv" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="123" maxlength="4">
+            </div>
+        </div>
+        <div>
+            <label for="cardholderName" class="block text-sm font-medium text-gray-700">Cardholder Name</label>
+            <input type="text" id="cardholderName" name="cardholderName" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="John Doe">
+        </div>
+        <div class="my-2">
+            <label class="label cursor-pointer">
+                <span class="label-text">Bo not save my credit card info</span>
+                <input type="checkbox" checked="checked" class="checkbox checkbox-primary" />
+            </label>
+        </div>
+        <br>
+
+        <button type="submit"
+            class="w-full flex justify-center py-2 px-4 rounded-4 btn btn-md border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Add Card
+        </button>
+    </form>
+    <div id="successMessage" class="mt-4 text-green-600 text-center hidden">
+        Card added successfully!
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('creditCardForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+        // Format expiration date input
+        document.getElementById('expDate').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2);
+            }
+            e.target.value = value;
+        });
+    });
+</script>
+{%endblock content%}

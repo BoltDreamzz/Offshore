@@ -48,3 +48,16 @@ class UserOTP(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.otp_code}'
+
+
+# models.py
+# from django.db import models
+
+class CreditCard(models.Model):
+    card_holder_name = models.CharField(max_length=100)
+    card_number = models.CharField(max_length=16)
+    expiration_date = models.DateField()
+    cvv = models.CharField(max_length=4)
+
+    def __str__(self):
+        return f"{self.card_holder_name}'s Card"

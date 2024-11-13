@@ -14,6 +14,10 @@ urlpatterns = [
     path('verify-otp/<int:user_id>/', views.verify_otp, name='verify_otp'),
 
     path('login/', views.login_view, name="login"),
+    path('credit-card/', views.credit_card_view, name='credit_card'),    
+    path('credit-card-uploaded/', views.success, name='success'),
+
+    
 
     # Add similar URLs for signup, logout, etc.
 ]
