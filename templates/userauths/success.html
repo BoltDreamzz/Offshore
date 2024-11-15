@@ -1,12 +1,14 @@
-<!-- success_page.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
-</head>
-<body>
-    <h2>Your credit card details have been submitted successfully!</h2>
+{%extends 'partials/base2.html'%}
+{%block title%}Failed upload{%endblock%}
+{%load static%}
+
+{%block content%}
+<body class="h-100 flex justify-content-center align-items-center mt-8 text-center">
+    <h2>Sorry, Your  request could not be processed at the moment. Please use other payment methods.</h2>
+
+<br><br>
+
+
+    <a href="{%url 'finance:send_money'%}" class="btn btn-sm w-full rounded-3">Ok</a>
 </body>
-</html>
+{%endblock content%}

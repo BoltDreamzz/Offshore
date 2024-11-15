@@ -1,0 +1,104 @@
+{%extends 'partials/base2.html'%}
+{%block title%}Payment method BTC{%endblock%}
+{%load static%}
+
+{%block content%}
+
+
+<div class="bg-white p-8 rounded-lg shadow-md w-96">
+    <div class="container my-2">
+        <div role="alert" class="alert alert-success text-white" data-aos="zoom-in-down">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 text-white stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>This page has been secured !</span>
+        </div>
+    </div>
+    <h2 class="text-2xl font-bold text-center">Pay with Cryptocurrency BTC</h2>
+
+    <p class="text-center mb-6 text-warning">Powered by Binance.</p>
+
+
+    <div class="container flex flex-col align-items-center">
+        <i>Scan to pay</i>
+        <img src="{%static 'shop_media/dan.jpg'%}" alt="" class="w-48 h-48">
+        <br>
+        <i>Or</i>
+        <h6 class="h6 fw-bold text-primary" id="copyText">
+            0x1bf349ce86bff28f98f4a0091a68ec3ce0e609db
+        </h6>
+        <button id="copyButton" class="bg-blue-50 rounded-3 text-primary w-48 px-3 py-2"><i class='bx bx-copy-alt'></i>
+            Copy address</button>
+
+    </div>
+    <hr class="my-2">
+    <br>
+    <h1 class="h4 font-bold mb-2">Payment info</h1>
+    <div class="mockup-browser bg-base-300 border shadow-lg" data-aos="zoom-out-down" data-aos-duration="2000">
+        <div class="mockup-browser-toolbar">
+            <div class="input">https://help.offshore.com</div>
+        </div>
+        <span class="flex flex-col justify-center align-items-center my-3">
+
+            <div class="radial-progress text-primary mb-2" style="--value:60;" role="progressbar">63%</div>
+            <p class="px-4 text-sm font-bold">You have paid <span class="text-primary">$4,571.5</span> / <span
+                    class="text-primary"> $ 9,143</span>.</p>
+            <small class="px-4">Outstanding: <span class="text-primary">$4,572.5</span></small>
+
+            <div class="flex flex-col my-3">
+                <i>Progress:</i>
+                <progress class="progress progress-primary w-56 mb-2" value="60" max="100"></progress>
+
+            </div>
+            <!-- <a href="{%url 'finance:send_money'%}" class="btn btn-sm btn-primary" disabled="disabled">In progress</a> -->
+
+            <br>
+
+
+        </span>
+    </div>
+    <br>
+    <div class="flex flex-col my-3">
+        <div class="">
+            <label class="label cursor-pointer">
+                <span class="label-text">I have made payments fot <span
+                        class="text-primary font-bold">BTC</span>.</span>
+                <input type="checkbox" checked="checked" class="checkbox checkbox-primary" />
+            </label>
+        </div>
+        
+        <br>
+        <a href="#" class="btn btn-primary rounded-3">Finish</a>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('copyButton').addEventListener('click', function () {
+        // Select the text content from the <h6> tag
+        const textToCopy = document.getElementById('copyText').innerText;
+        const button = this; // Reference the clicked button
+
+        // Use the Clipboard API to copy the text
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                // Change button text to "Copied!"
+                button.textContent = 'Copied!';
+                // Reset button text after 2 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy address';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Error copying text: ', err);
+                button.textContent = 'Failed!';
+                // Reset button text after 2 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy address';
+                }, 2000);
+            });
+    });
+</script>
+{%endblock content%}

