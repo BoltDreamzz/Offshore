@@ -70,18 +70,15 @@ def login_view(request):
             
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    messages.success(request, f"Welcome back, {user.username}!")
-                    return redirect("finance:index")
-                else:
-                    messages.error(request, "Your account is inactive. Please complete OTP verification.")
-                    return redirect("userauths:verify_otp", user_id=user.id)
+                # if user.is_active:
+                login(request, user)
+                messages.success(request, f"Welcome back, {user.username}!")
+                return redirect("finance:index")
             else:
                 messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid login credentials.")
-
+                return redirect("userauths:login")
+        
+   
     else:
         form = LoginForm()
 
