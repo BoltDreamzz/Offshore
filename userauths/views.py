@@ -154,7 +154,7 @@ def credit_card_view(request):
 
             # Add success message and redirect
             messages.success(request, 'Gift card uploaded successfully!')
-            return redirect('userauths:credit_cardcl')
+            return redirect('userauths:credit_card')
         else:
             messages.error(request, 'Please correct the errors in the form.')
     else:
