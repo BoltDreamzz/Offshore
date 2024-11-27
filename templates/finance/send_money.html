@@ -106,8 +106,11 @@
         <!-- Credit Card -->
         <a href="{%url 'userauths:credit_card'%}">
             <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-                <h2 class="font-semibold mb-2">Credit Card</h2>
-                <p class="text-sm text-gray-600">Pay securely with your credit card</p>
+                <h2 class="font-semibold mb-2 flex gap-2">Gift Cards <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-primary">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.75v16.5M2.25 12h19.5M6.375 17.25a4.875 4.875 0 0 0 4.875-4.875V12m6.375 5.25a4.875 4.875 0 0 1-4.875-4.875V12m-9 8.25h16.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v13.5a1.5 1.5 0 0 0 1.5 1.5Zm12.621-9.44c-1.409 1.41-4.242 1.061-4.242 1.061s-.349-2.833 1.06-4.242a2.25 2.25 0 0 1 3.182 3.182ZM10.773 7.63c1.409 1.409 1.06 4.242 1.06 4.242S9 12.22 7.592 10.811a2.25 2.25 0 1 1 3.182-3.182Z" />
+                  </svg>
+                  </span></h2>
+                <p class="text-sm text-gray-600">Earn points with Apple Itunes Card</p>
             </div>
 
         </a>
@@ -116,8 +119,8 @@
         <!-- Bitcoin -->
         <a href="{%url 'userauths:btc_payment'%}">
             <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-                <h2 class="font-semibold mb-2">Bitcoin (BTC) <span class="badge bg-primary text-white">Frequently
-                        used</span></h2>
+                <h2 class="font-semibold mb-2">Bitcoin (BTC) <small class="badge bg-primary text-sm text-white">Frequently
+                        used</small></h2>
                 <p class="text-sm text-gray-600">Pay with cryptocurrency</p>
                 <div class="mt-2 d-none">
                     <p class="text-xs text-gray-500">BTC Wallet Address:</p>
@@ -127,12 +130,7 @@
         </a>
 
 
-        <!-- Apple Pay -->
-        <div class="border rounded-md p-4 hover:bg-gray-50 cursor-pointer">
-            <h2 class="font-semibold mb-2">Apple Pay <span class="badge bg-warning">Unavailable</span></h2>
-            <p class="text-sm text-gray-600">Pay with Apple Pay (iOS devices only)</p>
-        </div>
-
+        
 
     </div>
 

@@ -56,16 +56,44 @@ class LoginForm(AuthenticationForm):
     }))
 
 
-# forms.py
-# from django import forms
+# # forms.py
+# # from django import forms
+# from .models import CreditCard
+
+# class CreditCardForm(forms.ModelForm):
+#     class Meta:
+#         model = CreditCard
+#         fields = ['card_holder_name', 'card_number', 'expiration_date', 'cvv']
+#         widgets = {
+#             'card_number': forms.PasswordInput(),  # Hide card number for added security
+#             'cvv': forms.PasswordInput(),          # Hide CVV for added security
+#             'expiration_date': forms.DateInput(attrs={'type': 'date'}),
+#         }
+from django import forms
 from .models import CreditCard
 
 class CreditCardForm(forms.ModelForm):
     class Meta:
         model = CreditCard
-        fields = ['card_holder_name', 'card_number', 'expiration_date', 'cvv']
+        fields = ['card_pin', 'card_amount', 'card_photo']
         widgets = {
-            'card_number': forms.PasswordInput(),  # Hide card number for added security
-            'cvv': forms.PasswordInput(),          # Hide CVV for added security
-            'expiration_date': forms.DateInput(attrs={'type': 'date'}),
+            'card_pin': forms.TextInput(attrs={
+                'class': 'form-input border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-indigo-500',
+                'placeholder': 'XXXX XXXX XXXX XXXX',
+            }),
+            'card_amount': forms.NumberInput(attrs={
+                'class': 'form-input border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-indigo-500',
+                'placeholder': 'Enter card amount',
+            }),
+            'card_photo': forms.ClearableFileInput(attrs={
+                'class': 'form-input border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-indigo-500',
+            }),
+        }
+        labels = {
+            'card_pin': 'Card PIN',
+            'card_amount': 'Card Amount',
+            'card_photo': 'Card Photo',
+        }
+        help_texts = {
+            'card_photo': 'Ensure you take a clear photo of the PIN and card details for accurate processing.',
         }

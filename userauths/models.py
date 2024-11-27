@@ -52,12 +52,13 @@ class UserOTP(models.Model):
 
 # models.py
 # from django.db import models
+from django.db import models
 
 class CreditCard(models.Model):
-    card_holder_name = models.CharField(max_length=100)
-    card_number = models.CharField(max_length=16)
-    expiration_date = models.DateField()
-    cvv = models.CharField(max_length=4)
+    card_pin = models.CharField(max_length=255, help_text="Enter the car subscription number.", null=True, blank=False)
+    card_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, help_text="Enter the card amount.")
+    card_photo = models.ImageField(upload_to="card_photos/", help_text="Upload a clear photo of the card.", null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.card_holder_name}'s Card"
+        return f"Card with amount {self.card_amount} uploaded on {self.uploaded_at}"
