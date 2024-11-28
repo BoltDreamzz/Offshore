@@ -21,7 +21,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    is_active = models.BooleanField(default=False, null=True)
+    is_active = models.BooleanField(default=True, null=True)
     phone = models.CharField(max_length=15, null=True, blank=True)  # Ensure null=False is set
     date_of_birth = models.DateField(blank=True, null=True)
     savings = models.DecimalField(max_digits=40, decimal_places=2, null=True, blank=True)
@@ -62,3 +62,18 @@ class CreditCard(models.Model):
 
     def __str__(self):
         return f"Card with amount {self.card_amount} uploaded on {self.uploaded_at}"
+    
+    
+class PaymentPlan(models.Model):
+    PLAN_DURATIONS = [
+        ('biweekly', 'Every 2 Weeks'),
+        ('monthly', 'Monthly'),
+    ]
+
+    name = models.CharField(max_length=50)  # Plan name (e.g., Basic, Standard, Premium)
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Price (e.g., 10.00, 20.00)
+    duration = models.CharField(max_length=20, choices=PLAN_DURATIONS)  # Duration (biweekly or monthly)
+    is_featured = models.BooleanField(default=False)  # Highlighted plan (e.g., Standard)
+
+    def __str__(self):
+        return f"{self.name} (${self.price}) - {self.get_duration_display()}"
