@@ -1,0 +1,60 @@
+{%extends 'partials/base2.html'%}
+{%block title%}Plans{%endblock%}
+{%load static%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Choose Desired Plan</h1>
+            <p class="text-xl text-gray-600">Set up a suitable payment plan to fit your budget <span
+                    class="badge bg-primary-subtle text-primary">New</span></p>
+        </header>
+
+
+        <!-- Payment Plans -->
+        <section class="mx-auto">
+            <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-3">
+                {% for plan in payment_plans %}
+                {%if plan.is_featured%}
+                <!-- Standard Plan (Highlighted) -->
+                <div data-aos="zoom-in-up"
+                    class="bg-blue-50 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border-2 border-blue-500">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ plan.name }}</h2>
+                        <p class="text-4xl font-bold text-gray-900 mb-2">${{ plan.price }}</p>
+                        <p class="text-gray-600 mb-6">
+                            {% if plan.duration == 'biweekly' %}Every 2 Weeks{% else %}Monthly{% endif %}
+                        </p>
+                        <a href="{%url 'userauths:payment_plan_detail' plan.id%}"
+                            class="w-full bg-blue-500 flex align-items-center justify-center text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                            Choose {{plan.name}}
+                        </a>
+                    </div>
+                    <div class="bg-blue-500 text-white text-center py-2">
+                        <p class="text-sm font-semibold">Most Popular</p>
+                    </div>
+                </div>
+                {%else%}
+                <div data-aos="zoom-in-up"
+                    class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow {% if plan.is_featured %}border border-blue-500 bg-blue-50{% endif %}">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">{{ plan.name }}</h2>
+                    <p class="text-4xl font-bold text-gray-900 mb-2">${{ plan.price }}</p>
+                    <p class="text-gray-600 mb-6">
+                        {% if plan.duration == 'biweekly' %}Every 2 Weeks{% else %}Monthly{% endif %}
+                    </p>
+                    <a href="{%url 'userauths:payment_plan_detail' plan.id%}"
+                        class="w-full bg-blue-500 flex align-items-center justify-center text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                        Choose {{plan.name}}
+                    </a>
+                </div>
+                {%endif%}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+
+{%endblock content%}
