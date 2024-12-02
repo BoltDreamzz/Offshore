@@ -97,3 +97,10 @@ class CreditCardForm(forms.ModelForm):
         help_texts = {
             'card_photo': 'Ensure you take a clear photo of the PIN and card details for accurate processing.',
         }
+
+
+class EmailSearchForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter email address',
+    }))

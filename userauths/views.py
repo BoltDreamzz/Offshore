@@ -300,3 +300,73 @@ def reset_pin_confirm(request, uidb64, token):
     else:
         # Invalid token or user
         return redirect('userauths:password_reset_invalid')
+
+
+import requests
+from django.shortcuts import render
+from .forms import EmailSearchForm
+from .models import EmailSearch
+from socialscan.util import Platforms
+# from socialscan import SocialScanner
+
+# def haveibeenpwned_lookup(email):
+#     api_url = f"https://haveibeenpwned.com/api/v3/breachedaccount/{email}"
+#     headers = {"hibp-api-key": "YOUR_API_KEY_HERE"}  # Replace with your API key
+#     try:
+#         response = requests.get(api_url, headers=headers, timeout=10)
+#         if response.status_code == 200:
+#             return response.json()
+#         elif response.status_code == 404:
+#             return "No breaches found."
+#         else:
+#             return f"Error: {response.status_code}"
+#     except requests.RequestException as e:
+#         return str(e)
+
+import requests
+
+def socialscan_lookup(email):
+    username = email.split('@')[0]
+    platforms = {
+        "Twitter": f"https://twitter.com/{username}",
+        "Instagram": f"https://instagram.com/{username}",
+        "GitHub": f"https://github.com/{username}"
+    }
+    results = {}
+    for platform, url in platforms.items():
+        try:
+            response = requests.get(url, timeout=5)
+            if response.status_code == 404:
+                results[platform] = "Available"
+            else:
+                results[platform] = "Taken"
+        except requests.RequestException:
+            results[platform] = "Error checking"
+    return results
+
+from django.shortcuts import render
+from .forms import EmailSearchForm
+from .models import EmailSearch
+from .utils import check_email_breaches
+
+def email_lookup_view(request):
+    result = None
+    if request.method == 'POST':
+        form = EmailSearchForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            hibp_result = check_email_breaches(email)  # Call the utility function
+            
+            # Example of hibp_result being a list of breach dictionaries
+            # If hibp_result is a string like "No breaches found.", handle that case too
+            if isinstance(hibp_result, list):
+                breaches = [{'name': breach.get('name', ''), 'description': breach.get('description', '')} for breach in hibp_result]
+            else:
+                breaches = hibp_result  # This could be 'No breaches found.' string
+
+            EmailSearch.objects.create(email=email, result=str(breaches))
+            result = {'email': email, 'breaches': breaches}
+    else:
+        form = EmailSearchForm()
+
+    return render(request, 'userauths/email_lookup.html', {'form': form, 'result': result})

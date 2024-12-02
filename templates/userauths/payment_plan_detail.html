@@ -27,7 +27,7 @@
                 </div> -->
                 <div class="flex justify-between">
                     <span>Save:</span>
-                    <span>$200.09</span>
+                    <span class="badge bg-dark text-white">$200.09</span>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="flex flex-col">
 
             <p class="">Outstanding: <span class="text-primary font-bold">$15,183.54</span> out of <span
-                    class="text-primary font-bold">$30,754</span>.</p>
+                    class="text-primary font-bold">$60,754</span>.</p>
 
         </div>
         <br>
@@ -46,7 +46,7 @@
             <div class="border border-gray-200 rounded-md">
                 <button
                     class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                    <span class="text-lg font-medium text-gray-700">Pay with Gift Card</span>
+                    <span class="text-lg font-medium text-gray-700">Pay ${{plan.price}} {% if plan.duration == 'biweekly' %}Every 2 Weeks{% else %}Monthly{% endif %} with Gift Card</span>
                     <i class='bx bx-chevron-down text-2xl text-gray-500 transition-transform duration-200'></i>
                 </button>
                 <div class="hidden p-4 bg-white">
@@ -74,7 +74,7 @@
             <div class="border border-gray-200 rounded-md">
                 <button
                     class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                    <span class="text-lg font-medium text-gray-700">Pay with Bitcoin BTC</span>
+                    <span class="text-lg font-medium text-gray-700">Pay ${{plan.price}} {% if plan.duration == 'biweekly' %}Every 2 Weeks{% else %}Monthly{% endif %} with Bitcoin BTC</span>
                     <i class='bx bx-chevron-down text-2xl text-gray-500 transition-transform duration-200'></i>
                 </button>
                 <div class="hidden p-4 bg-gray-100">
@@ -102,7 +102,7 @@
             <div class="border border-gray-200 rounded-md">
                 <button
                     class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                    <span class="text-lg font-medium text-gray-700">Pay with Bitcoin Cash BCH</span>
+                    <span class="text-lg font-medium text-gray-700">Pay ${{plan.price}} {% if plan.duration == 'biweekly' %}Every 2 Weeks{% else %}Monthly{% endif %} with Bitcoin Cash BCH</span>
                     <i class='bx bx-chevron-down text-2xl text-gray-500 transition-transform duration-200'></i>
                 </button>
                 <div class="hidden p-4 bg-gray-100">
@@ -130,8 +130,7 @@
                         <div class="mb-4">
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" id="paymentCheckbox" class="form-checkbox h-5 w-5 text-blue-600">
-                                <span class="ml-2 text-gray-700">I have made payments for <span
-                                        class="text-blue-600 font-bold">BTC</span>.</span>
+                                <span class="ml-2 text-gray-700">I have completed my payments.</span>
                             </label>
                         </div>
                         <button id="finishButton"

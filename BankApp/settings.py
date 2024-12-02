@@ -161,3 +161,5 @@ AUTHENTICATION_BACKENDS = [
     'userauths.backends.CustomUserBackend',  # Add your custom backend here
     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend for compatibility
 ]
+
+RAPIDAPI_KEY='75b6a705c3mshba59724f39407eep11ce46jsn1614648abd61'

@@ -77,3 +77,11 @@ class PaymentPlan(models.Model):
 
     def __str__(self):
         return f"{self.name} (${self.price}) - {self.get_duration_display()}"
+
+class EmailSearch(models.Model):
+    email = models.EmailField()
+    result = models.TextField()  # Store search results as text
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
